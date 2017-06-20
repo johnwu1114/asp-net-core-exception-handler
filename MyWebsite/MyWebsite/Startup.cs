@@ -20,6 +20,10 @@ namespace MyWebsite
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseMiddleware<FirstMiddleware>();
             //app.UseMiddleware<SecondMiddleware>();
             //app.UseMiddleware<ThirdMiddleware>();

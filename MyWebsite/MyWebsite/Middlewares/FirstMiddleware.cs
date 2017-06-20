@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Threading.Tasks;
 
 namespace MyWebsite.Middlewares
@@ -14,15 +15,18 @@ namespace MyWebsite.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
+            if (context.Request.Path.Value.IndexOf("/error/middleware/before-action", StringComparison.CurrentCultureIgnoreCase) != -1)
+            {
+                throw new Exception($"Exception from {GetType().Name} in. \r\n");
+            }
+
             await context.Response.WriteAsync($"{GetType().Name} in. \r\n");
 
-            try
+            await _next(context);
+
+            if (context.Request.Path.Value.IndexOf("/error/middleware/after-action", StringComparison.CurrentCultureIgnoreCase) != -1)
             {
-                await _next(context);
-            }
-            catch
-            {
-                await context.Response.WriteAsync($"{GetType().Name} catch exception. \r\n");
+                throw new Exception($"Exception from {GetType().Name} out. \r\n");
             }
 
             await context.Response.WriteAsync($"{GetType().Name} out. \r\n");

@@ -8,7 +8,7 @@ namespace MyWebsite.Filters
     {
         public Task OnExceptionAsync(ExceptionContext context)
         {
-            context.HttpContext.Response.WriteAsync($"{GetType().Name} in. \r\n");
+            context.HttpContext.Response.WriteAsync($"{GetType().Name} catch exception. Message: {context.Exception.Message}");
             return Task.CompletedTask;
         }
     }
