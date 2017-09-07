@@ -1,7 +1,7 @@
 This repository is sample code for ASP.NET Core.
 Use the Visual Studio 2017 to development.
 
-ASP.NET Core 教學 - Exception Handler
+# ASP.NET Core 教學 - Exception Handler
 
 ASP.NET Core 要做一個通用的 Exception Handler 可以透過 Middleware 或 Filter，但兩者之間的執行週期確大不相同。  
 本篇將介紹 ASP.NET Core 透過 Middleware 及 Filter 異常處理的差異。  
